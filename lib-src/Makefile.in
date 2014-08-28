@@ -305,8 +305,9 @@ TAGS: etags${EXEEXT}
 ## distribute Emacs.  If they were clobbered, all the .elc files were
 ## clobbered too.
 test-distrib${EXEEXT}: ${srcdir}/test-distrib.c
-	$(CC) ${ALL_CFLAGS} -o test-distrib${EXEEXT} ${srcdir}/test-distrib.c
-	./test-distrib ${srcdir}/testfile
+	$(CC) ${ALL_CFLAGS} -o test-distrib.js ${srcdir}/test-distrib.c --embed-file \
+	  ${srcdir}/testfile
+	node ./test-distrib.js testfile
 
 ../lib/libgnu.a: $(config_h)
 	cd ../lib && $(MAKE) libgnu.a
@@ -338,7 +339,7 @@ profile${EXEEXT}: ${srcdir}/profile.c $(NTLIB) $(config_h)
 
 make-docfile${EXEEXT}: ${srcdir}/make-docfile.c $(NTLIB) $(config_h)
 	$(CC) ${ALL_CFLAGS} ${srcdir}/make-docfile.c $(LOADLIBES) $(NTLIB) \
-	  -o make-docfile${EXEEXT}
+	  -o make-docfile.js
 
 movemail${EXEEXT}: ${srcdir}/movemail.c pop.o $(NTLIB) $(config_h)
 	$(CC) ${ALL_CFLAGS} ${MOVE_FLAGS} ${srcdir}/movemail.c pop.o \
